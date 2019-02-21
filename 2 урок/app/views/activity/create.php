@@ -21,10 +21,12 @@ use \yii\bootstrap\ActiveForm;
             <input type="date" name="calendar" value="2019-03-01"
                    max="2050-06-01" min="2010-01-01">
         </p>
-        <form>
-            <p>В какое время запускать событие?</p>
-            <p><input type="time" name="cron" value="12:00" min="00:01" max="06:00"></p>
-        </form>
+<!--        <form>-->
+<!--            <p>В какое время запускать событие?</p>-->
+<!--            <p><input type="time" name="cron" value="12:00" min="00:01" max="06:00"></p>-->
+<!--        </form>-->
+
+        <?=$form->field($activity,'cron')->textInput(['type'=>'time','min'=>'00:01','max'=>'06:00'])?>
 
         <p>
             Будний день <?=$form->field($activity, "week")->radio()?>

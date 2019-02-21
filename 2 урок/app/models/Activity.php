@@ -24,11 +24,13 @@ class Activity extends Model
 
     public $week;
 
+    public $cron;
+
     function  rules()
     {
         return [
             ["title", "string","max"=> 150, "min"=> 2],
-
+            ['corn',"string"],
 
             [["title"],"required"],
             ["is_blocked","boolean"],
@@ -40,6 +42,7 @@ class Activity extends Model
     function attributeLabels()
     {
         return [
+            "cron"=>'Время запуска события в космос',
             "title"=>"Событие",
             "description"=>"Описание",
             "is_blocked"=>"Блокирующее",
