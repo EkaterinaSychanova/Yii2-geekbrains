@@ -6,9 +6,7 @@
  */
 
 namespace app\assets;
-
 use yii\web\AssetBundle;
-
 /**
  * Main application asset bundle.
  *

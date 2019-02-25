@@ -7,20 +7,37 @@
  */
 
 namespace app\components;
-
-use \yii\base\Component;
-
+use app\models\Activity;
+use yii\base\Component;
 class ActivityComponent extends Component
 {
-
-    /**@var string class of activity */
+    /**@var string class of activity entity*/
     public $activity_class;
+    /**@return Activity*/
+    public function getModel($params=null) {
+        $model = new $this -> activity_class;
+        if ($params && is_array($params)) {
+            $model -> load($params);
+        }
 
-    /**
-     * @return Activity
-     */
+        return $model;
+    }
 
-    public function getModel() {
-        return new $this->activity_class;
+    public function createActivity(&$model){
+        if($model -> validate()) {
+            if ($model->image) {
+                $path = $this->getPathSaveFile();
+                $name = mt_rand(0, 9999).time().'.'.$model->image->getExtension();
+                if (!$model->image->saveAs($path.$name)) {
+                    $model->addError('image', 'не удалось загрузить файл');
+                    return false;
+                }
+                $model->image->$name;
+            }
+            return true;
+        }
+    }
+    private function getPathSaveFile() {
+        return \Yii::getAlias('@app/web/images');
     }
 }
